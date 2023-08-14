@@ -1,8 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
 import { Auth, Amplify } from 'aws-amplify';
 
-Amplify.configure({Auth: {region: 'us-east-1',userPoolId: 'us-east-1_Ay0hpMnVz',userPoolWebClientId: '7e051102ekj8j3t2f81o0ge04k'}});
+Amplify.configure({Auth: {
+  region: 'us-east-1',
+  userPoolId: 'us-east-1_IyKSccguL',
+  userPoolWebClientId: '45goinacta98u48qst3311vnuh'
+}});
 
 async function signUp(event) {
   console.log('here');
@@ -12,7 +15,7 @@ async function signUp(event) {
     const userName = event.currentTarget.elements.usernameInput.value;
     const password = event.currentTarget.elements.passwordInput.value
 
-      const { user } = await Auth.signUp({
+      await Auth.signUp({
           username: userName,
           password: password,
       });
@@ -43,8 +46,10 @@ async function signIn(event) {
     const username = event.currentTarget.elements.usernameInput.value;
     const password = event.currentTarget.elements.passwordInput.value
     const user = await Auth.signIn(username, password);
-      console.log('user: ', user);
+    console.log('user: ', user);
+    alert(`id_token: ${user.signInUserSession.idToken.jwtToken}`);
   } catch (error) {
+    console.log(error);
     alert(error);
   }
 }
