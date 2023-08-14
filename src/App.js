@@ -4,7 +4,8 @@ import { Auth, Amplify } from 'aws-amplify';
 Amplify.configure({Auth: {
   region: 'us-east-1',
   userPoolId: 'us-east-1_IyKSccguL',
-  userPoolWebClientId: '45goinacta98u48qst3311vnuh'
+  userPoolWebClientId: '7qdk902c5qp2ooo1h91fhdee4m',
+  authenticationFlowType: 'USER_PASSWORD_AUTH',
 }});
 
 async function signUp(event) {
