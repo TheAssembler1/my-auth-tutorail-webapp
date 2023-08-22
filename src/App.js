@@ -1,10 +1,29 @@
 import './App.css';
 import { Auth, Amplify } from 'aws-amplify';
+import { dotenv } from 'dotenv';
+
+dotenv.configure();
+
+const USER_POOL_WEB_CLIENT_ID = process.env.USER_POOL_WEB_CLIENT_ID;
+const USER_POOL_ID = process.env.USER_POOL_ID;
+const AWS_REGION = process.env.AWS_REGION;
+
+if(!USER_POOL_WEB_CLIENT_ID) {
+  throw new Error('Expected USER_POOL_WEB_CLIENT_ID to be set');
+}
+
+if(!USER_POOL_ID) {
+  throw new Error('Expected USER_POOL_ID to be set');
+}
+
+if(!AWS_REGION) {
+  throw new Error('Expected AWS_REGION to be set');
+}
 
 Amplify.configure({Auth: {
-  region: 'us-east-1',
-  userPoolId: 'us-east-1_IyKSccguL',
-  userPoolWebClientId: '7qdk902c5qp2ooo1h91fhdee4m',
+  region: AWS_REGION,
+  userPoolId: USER_POOL_ID,
+  userPoolWebClientId: USER_POOL_WEB_CLIENT_ID,
   authenticationFlowType: 'USER_PASSWORD_AUTH',
 }});
 
